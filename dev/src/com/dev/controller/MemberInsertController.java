@@ -31,7 +31,7 @@ public class MemberInsertController implements Controller {
 		member.setMail(mail);
 
 		// Service 객체의 메서드 호출
-		MemberService service = MemberService.getInstance();
+		MemberService service = MemberService.getInstance();	//객체 의존성 주입(Dependency Injection) - controller만 건들면 되니 이런 캡슐화는 중요하지
 		service.memberInsert(member);
 
 		// Output View 페이지로 이동

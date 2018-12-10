@@ -11,13 +11,20 @@ public class FrontController extends HttpServlet {
 
 	String charset = null;
 	HashMap<String, Controller> list = null;
-
+	//서블릿 객체 삭제시 호출 : 자원 해제
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+	}
+		
+	//서블릿 객체 생성시 호출 : 초기화 : 최초 요청시
+	//객체 주입 처음 한번만 실행! 그 이후 service에서 알아서 처리한다.
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 
 		charset = sc.getInitParameter("charset");
 		
-		//객체 주입 처음 한번만 실행! 그 이후 service에서 알아서 처리한다.
 		list = new HashMap<String, Controller>();
 		list.put("/memberInsert.do", new MemberInsertController());
 		list.put("/memberSearch.do", new MemberSearchController());
@@ -27,6 +34,7 @@ public class FrontController extends HttpServlet {
 
 	}
 
+	//요청이 들어올 때마다 실행
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
